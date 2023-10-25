@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+</head>
+<body>
+    <button id="bnbButton" data-currency="bnb">BNB</button>
+    <button id="usdtButton" data-currency="usdt">USDT</button>
+    <button id="busdButton" data-currency="busd">BUSD</button>
+    
+    <div>
+        <p id="conversionText">Amount in (Currency) you get</p>
+        <input type="text" id="amountToPay" placeholder="Enter amount">
+    </div>
+    
+    <div>
+        <input type="text" id="amountYouGet" placeholder="Amount in Ebube" disabled>
+    </div>
+
+    <script>
+        const rates = {
+            bnb: 5000,
+            usdt: 180,
+            busd: 180
+        };
+
+        document.querySelectorAll("button").forEach(function(button) {
+            button.addEventListener("click", function() {
+                const currency = this.getAttribute("data-currency");
+                updateConversionText(currency);
+            });
+        });
+
+        document.getElementById("amountToPay").addEventListener("input", calculateAmountYouGet);
+
+        function updateConversionText(currency) {
+            document.getElementById("conversionText").textContent = Amount in ${currency.toUpperCase()} you get;
+        }
+
+        function calculateAmountYouGet() {
+            const selectedCurrency = document.getElementById("conversionText").textContent.split(" ")[3].toLowerCase();
+            const amountToConvert = parseFloat(document.getElementById("amountToPay").value);
+            const conversionRate = rates[selectedCurrency];
+            const amountInEbube = amountToConvert * conversionRate;
+
+            if (!isNaN(amountInEbube)) {
+                document.getElementById("amountYouGet").value = amountInEbube;
+            } else {
+                document.getElementById("amountYouGet").value = "";
+            }
+        }
+    </script>
+</body>
+</html>
