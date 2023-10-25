@@ -1,4 +1,12 @@
- <script type="text/javascript" src="web.js"></script>     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
-    <link rel="stylesheet" href="modal.css">    <link rel="stylesheet" href="modal.css">
-    <button id="connect" class="mintBtn" onclick="connectContract()">CONNECT</button>
+const express = require("express");
+const path = require("path");
+const app = express();
+
+// Serve static files from the "Tip_Coin_files" directory
+app.use(express.static(path.join(__dirname, "")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
+app.listen(process.env.PORT || 3000)
